@@ -7,6 +7,10 @@ import com.firstproject.dombyraback.repository.UserRepository;
 import com.firstproject.dombyraback.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Service
 public class AuthService {
@@ -24,6 +28,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
+
     public void register(RegisterRequest request) {
 
         if (!request.getPassword().equals(request.getConfirmPassword())) {
@@ -46,14 +51,19 @@ public class AuthService {
 
         User user = userRepository.findByPhone(request.getPhone())
                 .orElseThrow(() ->
-                        new RuntimeException("User not found")
+                        new ResponseStatusException(
+                                BAD_REQUEST,
+                                "User not found")
                 );
 
         if (!passwordEncoder.matches(
                 request.getPassword(),
                 user.getPassword()
         )) {
-            throw new RuntimeException("Wrong password");
+            throw new ResponseStatusException(
+                    UNAUTHORIZED,
+                    "Wrong phone or password"
+            );
         }
 
         String token = jwtService.generateToken(user.getPhone());
