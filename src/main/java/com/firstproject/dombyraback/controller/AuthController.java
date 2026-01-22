@@ -22,11 +22,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(
-            @Valid @RequestBody RegisterRequest request
-    ) {
-        authService.register(request);
-        return ResponseEntity.ok("Registered successfully");
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
+        try {
+            authService.register(request);
+            return ResponseEntity.ok("Registered successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        }
     }
 
     @PostMapping("/login")
