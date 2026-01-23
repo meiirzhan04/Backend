@@ -29,7 +29,7 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
-    public void register(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
 
         if (!request.getPassword().equals(request.getConfirmPassword())) {
             throw new RuntimeException("Passwords do not match");
@@ -45,6 +45,8 @@ public class AuthService {
         );
 
         userRepository.save(user);
+        String token = jwtService.generateToken(user.getPhone());
+        return new AuthResponse(token);
     }
 
     public AuthResponse login(LoginRequest request) {
