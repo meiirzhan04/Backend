@@ -9,6 +9,12 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -197,4 +203,9 @@ public class TelegramService {
         System.out.println("🔍 Проверка подключения @" + username + ": " + connected);
         return connected;
     }
+}
+
+
+enum RegistrationStep {
+    INIT, OTP_SENT, NAME_PENDING, COMPLETED
 }
