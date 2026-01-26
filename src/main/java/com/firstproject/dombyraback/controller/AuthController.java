@@ -94,7 +94,7 @@ public class AuthController {
         boolean connected = telegramService.isUserConnected(username);
         return ResponseEntity.ok(Map.of(
                 "connected", connected,
-                "botUsername", "dombyra_auth_bot"
+                "botUsername", "DombyraAuthBot"
         ));
     }
 }
