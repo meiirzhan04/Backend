@@ -16,7 +16,7 @@ public class JwtService {
             "VERY_SECRET_KEY_1234567890_DOMBYRA_BACKEND";
 
     private static final long EXPIRATION =
-            1000 * 60 * 60 * 24; // 24 часа
+            1000 * 60 * 60 * 24;
 
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 

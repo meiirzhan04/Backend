@@ -2,7 +2,6 @@ package com.firstproject.dombyraback.controller;
 
 import com.firstproject.dombyraback.auth.UserDto;
 import com.firstproject.dombyraback.repository.UserRepository;
-import com.firstproject.dombyraback.security.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +13,9 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
-    private final JwtService jwtService;
 
-    public UserController(UserRepository userRepository, JwtService jwtService) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.jwtService = jwtService;
     }
 
     @GetMapping("/users")
