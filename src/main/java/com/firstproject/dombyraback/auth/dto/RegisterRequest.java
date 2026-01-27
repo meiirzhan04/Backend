@@ -17,9 +17,4 @@ public class RegisterRequest {
 
     @Size(min = 6)
     private String confirmPassword;
-
-    @NotBlank
-    private String name;
-    @NotBlank
-    private String telegramUsername;
 }
