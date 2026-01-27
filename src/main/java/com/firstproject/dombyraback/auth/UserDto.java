@@ -9,5 +9,5 @@ import lombok.Getter;
 public class UserDto {
     private Long id;
     private String phone;
-    private String name; // или другие поля, которые нужны на клиенте
+    private String name;
 }
